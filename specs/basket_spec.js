@@ -20,4 +20,11 @@ describe("Shopping basket", function(){
     assert.equal("fish", basket.contents[0].name)
   })
 
+  it("test can remove all items from basket", function() {
+    basket.addItem({name: "milk", price: 0.89});
+    basket.addItem({name: "fish", price: 3.99});
+    basket.removeAllItems();
+    assert.equal(0, basket.countContents());
+  })
+
 }); 

@@ -18,9 +18,9 @@ var basket = {
       this.contents.splice(itemIndex, 1);
     }
   },
-  // removeAllItems: function() {
-    
-  // }
+  removeAllItems: function() {
+    this.contents = [];
+  }
 };
 
 module.exports = basket;
