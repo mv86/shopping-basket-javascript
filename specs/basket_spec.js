@@ -27,4 +27,10 @@ describe("Shopping basket", function(){
     assert.equal(0, basket.countContents());
   })
 
+  it("test can add value of basket", function() {
+    basket.addItem({name: "milk", price: 0.89});
+    basket.addItem({name: "fish", price: 3.99});
+    assert.equal(4.88, basket.countValueOfBasket())
+  })
+
 }); 

@@ -20,6 +20,13 @@ var basket = {
   },
   removeAllItems: function() {
     this.contents = [];
+  },
+  countValueOfBasket: function() {
+    var counter = 0;
+    for (var content of this.contents) {
+      counter += content.price;
+    }
+    return counter;
   }
 };
 
