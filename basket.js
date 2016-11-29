@@ -26,7 +26,14 @@ var basket = {
     for (var content of this.contents) {
       counter += content.price;
     }
-    return counter;
+    if (counter > 20) {
+      counter = this.discountOver20(counter)
+    }
+    var counterRounded = Math.round(counter * 100) / 100;
+    return counterRounded;
+  },
+  discountOver20: function(basketTotal) {
+    return basketTotal * 0.9;
   }
 };
 

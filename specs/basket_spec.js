@@ -33,4 +33,11 @@ describe("Shopping basket", function(){
     assert.equal(4.88, basket.countValueOfBasket())
   })
 
+  it("test can 10% discount over £20", function() {
+    basket.removeAllItems();
+    basket.addItem({name: 'cheese', price: 2.00})
+    basket.addItem({name: "shirt", price: 20.00});
+    assert.equal(19.80, basket.countValueOfBasket())
+  })
+
 }); 
