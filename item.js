@@ -1,8 +1,8 @@
-var item = {
-  name: "milk",
-  price: 0.89,
-  quantity: 2,
-  bygof: true
+var Item = function(name, price, quantity, bygof) {
+  this.name = name;
+  this.price = price;
+  this.quantity = quantity;
+  this.bygof = bygof;
 }
 
-module.exports = item;
+module.exports = Item;
