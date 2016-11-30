@@ -24,7 +24,7 @@ var basket = {
   countValueOfBasket: function() {
     var counter = 0;
     for (var content of this.contents) {
-      counter += content.price;
+      counter += (content.price * content.quantity);
     }
     if (counter > 20) {
       counter = this.discountOver20(counter)
