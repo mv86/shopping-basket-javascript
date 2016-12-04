@@ -1,5 +1,8 @@
-var basket = {
-  contents: [],
+var Basket = function() {
+  this.contents = [];
+};
+
+Basket.prototype = {
   countContents: function() {
     var counter = 0;
     for (var content of this.contents) {
@@ -21,20 +24,50 @@ var basket = {
   removeAllItems: function() {
     this.contents = [];
   },
-  countValueOfBasket: function() {
-    var counter = 0;
-    for (var content of this.contents) {
-      counter += (content.price * content.quantity);
+  countValueOfBasket: function(discountCard) {
+    var total = this.bygofItemSorter();
+    if (total > 20) {
+      total = this.discountOver20(total);
     }
-    if (counter > 20) {
-      counter = this.discountOver20(counter)
+    if (discountCard === true) {
+      total = this.discountCard(total);
     }
-    var counterRounded = Math.round(counter * 100) / 100;
-    return counterRounded;
+    var totalRounded = Math.round(total * 100) / 100;
+    return totalRounded;
   },
   discountOver20: function(basketTotal) {
     return basketTotal * 0.9;
+  },
+  bygofItemSorter: function() {
+    var bygofItems = [];
+    var totalOfItems = 0;
+    for (content of this.contents) {
+      if (content.bygof === true) {
+        bygofItems.push(content);
+      } else {
+        totalOfItems += (content.price * content.quantity);
+      }
+    }
+    var bygofDiscount = this.bygofDiscount(bygofItems);
+    return totalOfItems += bygofDiscount;
+  },
+  bygofDiscount: function(bygofItems) {
+    bygofDiscount = 0;
+    for (item of bygofItems) {
+      if ((item.quantity % 2) === 0) {
+        bygofDiscount += ((item.price * item.quantity) / 2); 
+      } else {
+        bygofDiscount += (((item.price * item.quantity) - item.price) / 2) + item.price;
+      }
+    }
+    return bygofDiscount;
+  },
+  discountOver20: function(basketTotal) {
+    return basketTotal * 0.9;
+  },
+  discountCard: function(basketTotal) {
+    return basketTotal * 0.95;
   }
 };
 
-module.exports = basket;
+module.exports = Basket;
